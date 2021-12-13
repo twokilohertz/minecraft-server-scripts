@@ -3,9 +3,9 @@ import hashlib
 import os
 
 # paper_query = requests.get("https://papermc.io/api/v2/projects/paper").json()
-builds_query = requests.get("https://papermc.io/api/v2/projects/paper/versions/1.18").json()
+builds_query = requests.get("https://papermc.io/api/v2/projects/paper/versions/1.18.1").json()
 latest_build = builds_query["builds"][len(builds_query["builds"]) - 1]
-info_query = requests.get("https://papermc.io/api/v2/projects/paper/versions/1.18/builds/" + str(latest_build)).json()
+info_query = requests.get("https://papermc.io/api/v2/projects/paper/versions/1.18.1/builds/" + str(latest_build)).json()
 filename = info_query["downloads"]["application"]["name"]
 checksum = info_query["downloads"]["application"]["sha256"]
 
@@ -15,7 +15,7 @@ if os.path.isfile("paperclip.jar") == True:
     os.remove("paperclip.jar")
 
 # Download and write to file
-paper_download = requests.get("https://papermc.io/api/v2/projects/paper/versions/1.18/builds/" + str(latest_build) + "/downloads/" + filename)
+paper_download = requests.get("https://papermc.io/api/v2/projects/paper/versions/1.18.1/builds/" + str(latest_build) + "/downloads/" + filename)
 print("Downloading " + filename + "...")
 file = open("paperclip.jar", "wb")
 file.write(paper_download.content)
